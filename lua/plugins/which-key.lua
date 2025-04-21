@@ -1,49 +1,53 @@
 return {
-	"folke/which-key.nvim",
-	lazy = true,
-	event = "VeryLazy",
-	opts = {
-		plugins = { spelling = true },
-		defaults = {},
-	},
-	config = function(_, opts)
-		local wk = require("which-key")
-		wk.setup(opts)
+  'folke/which-key.nvim',
+  event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+  opts = {
+    -- delay between pressing a key and opening which-key (milliseconds)
+    -- this setting is independent of vim.opt.timeoutlen
+    delay = 0,
+    icons = {
+      -- set icon mappings to true if you have a Nerd Font
+      mappings = vim.g.have_nerd_font,
+      -- If you are using a Nerd Font: set icons.keys to an empty table which will use the
+      -- default which-key.nvim defined Nerd Font icons, otherwise define a string table
+      keys = vim.g.have_nerd_font and {} or {
+        Up = '<Up> ',
+        Down = '<Down> ',
+        Left = '<Left> ',
+        Right = '<Right> ',
+        C = '<C-…> ',
+        M = '<M-…> ',
+        D = '<D-…> ',
+        S = '<S-…> ',
+        CR = '<CR> ',
+        Esc = '<Esc> ',
+        ScrollWheelDown = '<ScrollWheelDown> ',
+        ScrollWheelUp = '<ScrollWheelUp> ',
+        NL = '<NL> ',
+        BS = '<BS> ',
+        Space = '<Space> ',
+        Tab = '<Tab> ',
+        F1 = '<F1>',
+        F2 = '<F2>',
+        F3 = '<F3>',
+        F4 = '<F4>',
+        F5 = '<F5>',
+        F6 = '<F6>',
+        F7 = '<F7>',
+        F8 = '<F8>',
+        F9 = '<F9>',
+        F10 = '<F10>',
+        F11 = '<F11>',
+        F12 = '<F12>',
+      },
+    },
 
-		wk.add({
-			{ "]", "+next", desc = "Next error" },
-			{ "[", "+prev", desc = "Previous error" },
-
-			{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "[Telescope] Find file", mode = "n" },
-			{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "[Telescope] Live grep", mode = "n" },
-			{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "[Telescope] Buffers", mode = "n" },
-			{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "[Telescope] Help tags", mode = "n" },
-			{ "<leader>ft", "<cmd>Telescope treesitter<cr>", desc = "[Telescope] Treesitter", mode = "n" },
-			{
-				"<leader>f'",
-				"<cmd>Telescope find_files cwd=~/.config/nvim<cr>",
-				desc = "[Telescope] VimRC",
-				mode = "n",
-			},
-
-			{ "<leader>gb", desc = "[Fugitive] Git branches", mode = "n" },
-			{ "<leader>gs", desc = "[Fugitive] Git status", mode = "n" },
-
-			{ "<leader>xt", desc = "[Trouble] Toggle trouble", mode = "n" },
-			{ "<leader>xw", desc = "[Trouble] Toggle trouble workspace", mode = "n" },
-			{ "<leader>xq", desc = "[Trouble] Toggle quickfix", mode = "n" },
-			{ "<leader>xl", desc = "[Trouble] Toggle loclist", mode = "n" },
-
-			{ "<leader>th", desc = "[Terminal] Toggle terminal 1", mode = "n" },
-			{ "<leader>tj", desc = "[Terminal] Toggle terminal 2", mode = "n" },
-			{ "<leader>tk", desc = "[Terminal] Toggle terminal 3", mode = "n" },
-			{ "<leader>tl", desc = "[Terminal] Toggle terminal 4", mode = "n" },
-		})
-
-		wk.add(opts.defaults)
-	end,
-	init = function()
-		vim.o.timeout = true
-		vim.o.timeoutlen = 300
-	end,
+    -- Document existing key chains
+    spec = {
+      { '<leader>s', group = '[S]earch' },
+      { '<leader>t', group = '[T]oggle' },
+      { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+      { "<leader>'", group = '[Telescope] VimRC' },
+    },
+  },
 }
