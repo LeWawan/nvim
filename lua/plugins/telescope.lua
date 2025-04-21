@@ -1,18 +1,51 @@
 return {
   {
     'nvim-telescope/telescope.nvim',
-    event = 'VeryLazy',
+    event = 'VimEnter',
     lazy = true,
     dependencies = {
       'nvim-lua/plenary.nvim',
-      {
+      { -- If encountering errors, see telescope-fzf-native README for installation instructions
         'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release',
+
+        -- `build` is used to run some command when the plugin is installed/updated.
+        -- This is only run then, not every time Neovim starts up.
+        build = 'make',
+
+        -- `cond` is a condition used to determine whether this plugin should be
+        -- installed and loaded.
+        cond = function()
+          return vim.fn.executable 'make' == 1
+        end,
       },
+      { 'nvim-telescope/telescope-ui-select.nvim' },
+      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
       local telescope = require 'telescope.builtin'
 
+      -- You dont need to set any of these options. These are the default ones. Only
+      -- the loading is important
+      require('telescope').setup {
+        extensions = {
+          ['ui-select'] = {
+            require('telescope.themes').get_dropdown {},
+          },
+          fzf = {
+            fuzzy = true, -- false will only do exact matching
+            override_generic_sorter = true, -- override the generic sorter
+            override_file_sorter = true, -- override the file sorter
+            case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
+            -- the default case_mode is "smart_case"
+          },
+        },
+      }
+
+      -- Enable Telescope extensions if they are installed
+      pcall(require('telescope').load_extension, 'fzf')
+      pcall(require('telescope').load_extension, 'ui-select')
+
+      -- Keymaps
       vim.keymap.set('n', '<leader>fp', function()
         telescope.find_files { hidden = true }
       end)
@@ -76,23 +109,6 @@ return {
         require 'obsidian'
         vim.cmd ':ObsidianToday'
       end)
-
-      -- You dont need to set any of these options. These are the default ones. Only
-      -- the loading is important
-      require('telescope').setup {
-        extensions = {
-          fzf = {
-            fuzzy = true, -- false will only do exact matching
-            override_generic_sorter = true, -- override the generic sorter
-            override_file_sorter = true, -- override the file sorter
-            case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
-            -- the default case_mode is "smart_case"
-          },
-        },
-      }
-      -- To get fzf loaded and working with telescope, you need to call
-      -- load_extension, somewhere after setup function:
-      require('telescope').load_extension 'fzf'
     end,
   },
 }
