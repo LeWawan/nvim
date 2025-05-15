@@ -212,6 +212,9 @@ return {
       --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+
+      -- add type for each server of vim.lsp.Config
+      ---@type table<string, vim.lsp.Config>
       local servers = {
         -- clangd = {},
         -- gopls = {},
@@ -270,20 +273,53 @@ return {
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
+      -- Configuration Mason-lspconfig basique
       require('mason-lspconfig').setup {
-        ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-        automatic_installation = false,
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for ts_ls)
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
-          end,
-        },
+        ensure_installed = vim.tbl_keys(servers or {}),
+        automatic_enable = true,
       }
+
+      -- Obtenir les mappages entre paquets Mason et serveurs LSP
+      local mappings = require('mason-lspconfig.mappings').get_mason_map()
+      local registry = require 'mason-registry'
+
+      -- Fonction pour configurer un serveur en fusionnant configuration par défaut et personnalisée
+      local function setup_server(server_name)
+        -- Obtenir la configuration par défaut de mason-lspconfig (si disponible)
+        local ok, default_config = pcall(require, ('mason-lspconfig.lsp.%s'):format(server_name))
+        local config = ok and default_config or {}
+
+        -- Fusionner avec la configuration personnalisée
+        if servers[server_name] then
+          config = vim.tbl_deep_extend('force', config, servers[server_name])
+        end
+
+        -- Fusionner avec les capacités
+        config.capabilities = vim.tbl_deep_extend('force', capabilities or {}, config.capabilities or {})
+
+        -- Configurer et activer le serveur
+        vim.lsp.config(server_name, config)
+        vim.lsp.enable(server_name)
+      end
+
+      -- Configurer les serveurs déjà installés
+      for _, pkg_name in ipairs(registry.get_installed_package_names()) do
+        local server_name = mappings.package_to_lspconfig[pkg_name]
+        if server_name then
+          setup_server(server_name)
+        end
+      end
+
+      -- Configurer les nouveaux serveurs lors de leur installation
+      registry:on(
+        'package:install:success',
+        vim.schedule_wrap(function(pkg)
+          local server_name = mappings.package_to_lspconfig[pkg.name]
+          if server_name then
+            setup_server(server_name)
+          end
+        end)
+      )
     end,
   },
 
