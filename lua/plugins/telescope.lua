@@ -47,10 +47,10 @@ return {
 
       -- Keymaps
       vim.keymap.set('n', '<leader>fp', function()
-        telescope.find_files { hidden = true }
+        telescope.git_files()
       end)
       vim.keymap.set('n', '<leader>ff', function()
-        telescope.git_files()
+        telescope.find_files { hidden = true }
       end)
       vim.keymap.set('n', '<leader>fg', function()
         telescope.live_grep { hidden = true }
