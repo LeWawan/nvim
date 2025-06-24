@@ -49,6 +49,10 @@ return {
       { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
       { "<leader>'", group = '[Telescope] VimRC' },
       { '<leader><CR>', group = 'Reload config' },
+      { '<leader>th', group = '[Terminal] 1' },
+      { '<leader>tj', group = '[Terminal] 2' },
+      { '<leader>tk', group = '[Terminal] 3' },
+      { '<leader>tl', group = '[Terminal] 4' },
     },
   },
 }
