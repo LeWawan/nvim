@@ -35,6 +35,9 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 vim.keymap.set('n', '<C-p>', ':cprev<CR>')
 vim.keymap.set('n', '<C-n>', ':cnext<CR>')
 
+-- Sessionizer
+vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux neww tmux-sessionizer<CR>')
+
 -- Lsp
 local toggle_qf = function()
   local qf_exists = false
