@@ -290,6 +290,10 @@ return {
             end
           end,
         },
+        oxlint = {
+          cmd = { 'oxc_language_server' },
+          filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx', 'vue' },
+        },
       }
 
       -- Ensure the servers and tools above are installed
