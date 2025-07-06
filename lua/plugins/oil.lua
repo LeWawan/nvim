@@ -10,11 +10,6 @@ return {
         },
       }
 
-      vim.keymap.set('n', '<leader>m', function()
-        require('oil').toggle_float './'
-        vim.cmd 'setlocal relativenumber'
-      end, { silent = true })
-
       vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
     end,
   },
