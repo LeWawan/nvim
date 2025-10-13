@@ -11,22 +11,16 @@ return {
           vue = { 'prettier' },
           lua = { 'stylua' },
         },
+        formatters = {
+          rubocop = {
+            timeout_ms = 10000, -- 10 seconds
+          },
+        },
         format_on_save = {
           timeout_ms = 500,
           lsp_fallback = 'fallback',
         },
       }
-
-      require('ts-error-translator').setup {}
-    end,
-  },
-  {
-    'dmmulroy/ts-error-translator.nvim',
-    config = function()
-      vim.lsp.handlers['textDocument/publishDiagnostics'] = function(err, result, ctx)
-        require('ts-error-translator').translate_diagnostics(err, result, ctx)
-        vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx)
-      end
     end,
   },
 }

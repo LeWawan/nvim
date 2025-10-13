@@ -26,7 +26,7 @@ return {
 
     -- see below for full list of options 👇
     daily_notes = {
-      folder = '☀️  Dailies/',
+      folder = 'daily/',
     },
     follow_url_func = function(url)
       local os_name = vim.loop.os_uname().sysname

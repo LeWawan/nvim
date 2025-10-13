@@ -1,12 +1,17 @@
 return {
   'folke/noice.nvim',
-  -- enabled = false,
   -- branch = "v4.5.2",
   event = 'VeryLazy',
   opts = {
     lsp = {
       hover = {
         silent = true,
+      },
+    },
+    routes = {
+      {
+        view = 'notify',
+        filter = { event = 'msg_showmode' },
       },
     },
   },
