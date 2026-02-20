@@ -48,6 +48,11 @@ return {
       vim.cmd ':ObsidianToday'
     end)
 
+    vim.keymap.set('n', '<leader>,', function()
+      require 'obsidian'
+      vim.cmd ':ObsidianToggleCheckbox'
+    end)
+
     require('fzf-lua').setup {
       keymap = {
         builtin = {
