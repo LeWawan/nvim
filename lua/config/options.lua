@@ -22,25 +22,28 @@ vim.opt.showmode = false
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.schedule(function()
-  if vim.fn.has 'mac' == 1 then
-    vim.opt.clipboard = 'unnamedplus'
-  else
-    vim.g.clipboard = {
-      name = 'xsel',
-      copy = {
-        ['+'] = 'xsel --nodetach -i -b',
-        ['*'] = 'xsel --nodetach -i -p',
-      },
-      paste = {
-        ['+'] = 'xsel  -o -b',
-        ['*'] = 'xsel  -o -b',
-      },
-      cache_enabled = 1,
-    }
-    vim.opt.clipboard = 'unnamedplus'
-  end
-end)
+vim.opt.clipboard = 'unnamedplus'
+
+-- Let see what happens on macos
+-- vim.schedule(function()
+--   if vim.fn.has 'mac' == 1 then
+--     vim.opt.clipboard = 'unnamedplus'
+--   else
+--     vim.g.clipboard = {
+--       name = 'xsel',
+--       copy = {
+--         ['+'] = 'xsel --nodetach -i -b',
+--         ['*'] = 'xsel --nodetach -i -p',
+--       },
+--       paste = {
+--         ['+'] = 'xsel  -o -b',
+--         ['*'] = 'xsel  -o -b',
+--       },
+--       cache_enabled = 1,
+--     }
+--     vim.opt.clipboard = 'unnamedplus'
+--   end
+-- end)
 
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
