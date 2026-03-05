@@ -1,8 +1,7 @@
 return {
   {
     'nvim-telescope/telescope.nvim',
-    event = 'VimEnter',
-    lazy = true,
+    event = 'VeryLazy',
     dependencies = {
       'nvim-lua/plenary.nvim',
       { -- If encountering errors, see telescope-fzf-native README for installation instructions
@@ -79,9 +78,6 @@ return {
       end)
       vim.keymap.set('n', "<leader>'", function()
         telescope.git_files { prompt_title = '< VimRC >', cwd = '~/.dotfiles/nvim/.config/nvim', hidden = false }
-      end)
-      vim.keymap.set('n', '<leader>vh', function()
-        telescope.help_tags()
       end)
 
       -- Lsp keymaps

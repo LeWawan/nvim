@@ -1,7 +1,6 @@
 return {
   'tpope/vim-fugitive',
   event = 'VeryLazy',
-  lazy = true,
   config = function()
     -- Fzf
     vim.keymap.set('n', '<leader>gs', function()

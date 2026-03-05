@@ -10,7 +10,6 @@ vim.keymap.set('i', '<C-c>', '<Esc>')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', 'n', 'nzzzv')
-vim.keymap.set('n', 'n', 'nzzzv')
 
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
@@ -41,7 +40,6 @@ vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux neww tmux-sessionizer<CR>')
 -- Lsp
 local toggle_qf = function()
   local qf_exists = false
-  print(qf_exists)
   for _, win in pairs(vim.fn.getwininfo()) do
     if win['quickfix'] == 1 then
       qf_exists = true
