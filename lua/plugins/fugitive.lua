@@ -16,14 +16,9 @@ return {
       vim.cmd.Git 'fetch'
     end)
 
-    -- Push upstream for new branch
-    local function gitPushUpsOrgBranch()
+    vim.keymap.set('n', '<leader>gu', function()
       local branch = vim.fn.system "git branch --show-current 2> /dev/null | tr -d '\n'"
       vim.cmd('Git push --set-upstream origin ' .. branch)
-    end
-
-    vim.keymap.set('n', '<leader>gu', function()
-      gitPushUpsOrgBranch()
     end)
   end,
 }
