@@ -102,6 +102,24 @@ return {
   --   end,
   -- },
   {
+    'folke/tokyonight.nvim',
+    lazy = true,
+    priority = 1000,
+    opts = {
+      style = 'moon',
+      transparent = true,
+      terminal_colors = true,
+      styles = {
+        comments = { italic = true },
+        keywords = { italic = true },
+        functions = { italic = true },
+        variables = {},
+        sidebars = 'dark',
+        floats = 'dark',
+      },
+    },
+  },
+  {
     'nvim-lualine/lualine.nvim',
     lazy = false,
     priority = 1000,
@@ -145,6 +163,24 @@ return {
           },
           lualine_z = { 'location' },
         },
+        lualine_x = {
+          {
+            function()
+              return require('noice').api.statusline.mode.get()
+            end,
+            cond = function()
+              return package.loaded['noice'] and require('noice').api.statusline.mode.has()
+            end,
+            color = { fg = '#ff9e64' },
+          },
+          'encoding',
+          'fileformat',
+          'filetype',
+        },
+        lualine_y = {
+          'progress',
+        },
+        lualine_z = { 'location' },
       }
     end,
   },
