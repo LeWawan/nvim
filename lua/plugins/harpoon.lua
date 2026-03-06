@@ -33,7 +33,6 @@ return {
 
       vim.keymap.set('n', '<leader>e', function() default_list:add() end)
       vim.keymap.set('n', '<C-e>', function() harpoon.ui:toggle_quick_menu(default_list) end)
-      vim.keymap.set('n', '<C-r>', function() harpoon.ui:toggle_quick_menu(term_list) end)
 
       vim.keymap.set('n', '<C-h>', function() default_list:select(1) end)
       vim.keymap.set('n', '<C-j>', function() default_list:select(2) end)
@@ -77,6 +76,7 @@ return {
       vim.keymap.set('n', '<leader>tl', function() goto_terminal(4) end)
 
       vim.api.nvim_create_autocmd({'ExitPre'}, {
+        group = vim.api.nvim_create_augroup('harpoon', { clear = true }),
         pattern = '*',
         callback = function()
           term_list:clear()
