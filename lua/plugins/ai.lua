@@ -22,6 +22,18 @@ return {
       }
     end,
   },
+  {
+    'greggh/claude-code.nvim',
+    event = 'VeryLazy',
+    dependencies = {
+      'nvim-lua/plenary.nvim', -- Required for git operations
+    },
+    opts = {
+      window = {
+        position = 'vertical',
+      },
+    },
+  },
   -- {
   --   'supermaven-inc/supermaven-nvim',
   --   config = function()

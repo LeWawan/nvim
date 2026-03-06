@@ -16,6 +16,11 @@ return {
 
     -- see below for full list of optional dependencies 👇
   },
+  keys = {
+    { '<leader>ww', '<cmd>ObsidianSearch<cr>', desc = 'Obsidian Search' },
+    { '<leader>ws', '<cmd>ObsidianTags<cr>', desc = 'Obsidian Tags' },
+    { '<leader>wt', '<cmd>ObsidianToday<cr>', desc = 'Obsidian Today' },
+  },
   opts = {
     workspaces = {
       {

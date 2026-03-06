@@ -25,6 +25,14 @@ vim.keymap.set('n', '<leader>d', '"_d')
 vim.keymap.set('v', '<leader>d', '"_d')
 
 vim.keymap.set('n', '<leader><leader>x', '<cmd>source %<CR>')
+vim.keymap.set('n', '<leader><leader>h', function()
+  local file = vim.api.nvim_buf_get_name(0)
+  -- filename without path or extension
+  local filename = file:match("^.+/(.+)%.%w+$")
+
+  vim.cmd('Lazy reload ' .. filename)
+end)
+
 vim.keymap.set('n', '<leader>x', ':.lua<CR>')
 vim.keymap.set('v', '<leader>x', ':lua<CR>')
 

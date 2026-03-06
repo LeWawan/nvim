@@ -146,41 +146,16 @@ return {
               },
             },
           },
-          lualine_w = {
-            {
-              require('noice').api.statusline.mode.get,
-              cond = require('noice').api.statusline.mode.has,
-              color = { fg = '#ff9e64' },
-            },
+          lualine_x = {
+            'encoding',
+            'fileformat',
+            'filetype',
           },
-        },
-        lualine_x = {
-          'encoding',
-          'fileformat',
-          'filetype',
           lualine_y = {
             'progress',
           },
           lualine_z = { 'location' },
         },
-        lualine_x = {
-          {
-            function()
-              return require('noice').api.statusline.mode.get()
-            end,
-            cond = function()
-              return package.loaded['noice'] and require('noice').api.statusline.mode.has()
-            end,
-            color = { fg = '#ff9e64' },
-          },
-          'encoding',
-          'fileformat',
-          'filetype',
-        },
-        lualine_y = {
-          'progress',
-        },
-        lualine_z = { 'location' },
       }
     end,
   },

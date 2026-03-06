@@ -41,12 +41,11 @@ return {
           end
 
           map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-          map('<leader>gr', require('fzf-lua').lsp_references, '[G]oto [R]eferences')
-          map('<leader>gi', require('fzf-lua').lsp_implementations, '[G]oto [I]mplementation')
-          map('<leader>gd', require('fzf-lua').lsp_definitions, '[G]oto [D]efinition')
-          map('<leader>gD', require('fzf-lua').lsp_declarations, '[G]oto [D]efinition')
-          map('<leader>O', require('fzf-lua').lsp_document_symbols, 'Open Document Symbols')
-          map('<leader>gt', require('fzf-lua').lsp_typedefs, '[G]oto [T]ype Definition')
+          map('<leader>gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+          map('<leader>gi', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+          map('<leader>gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+          map('<leader>O', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
+          map('<leader>gt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
           map('[d', function()
             return vim.diagnostic.jump { count = 1, float = true }
           end, '[D]iagnostic [P]revious')

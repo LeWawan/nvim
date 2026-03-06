@@ -25,6 +25,12 @@ return {
           rubocop = {
             timeout_ms = 10000, -- 10 seconds
           },
+          prettier = {
+            prepend_args = { '--print-width', '120' },
+          },
+          stylua = {
+            prepend_args = { '--print-width', '120' },
+          },
         },
         format_on_save = {
           timeout_ms = 500,
