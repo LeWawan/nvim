@@ -110,3 +110,6 @@ vim.g.loaded_python3_provider = 0
 
 -- obsidian related settings
 vim.opt.conceallevel = 1
+
+-- Prepend mise shims to PATH
+vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
