@@ -5,6 +5,12 @@ return {
     'MunifTanjim/nui.nvim',
   },
   opts = {
+    routes = {
+      {
+        view = 'notify',
+        filter = { event = 'msg_showmode' },
+      },
+    },
     lsp = {
       hover = {
         silent = true,
