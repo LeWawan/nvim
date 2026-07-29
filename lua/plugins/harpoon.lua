@@ -32,8 +32,9 @@ return {
       local term_list = harpoon:list('terminals')
       local ai_list = harpoon:list('ai')
 
-      vim.keymap.set('n', '<leader>e', function() default_list:add() end)
-      vim.keymap.set('n', '<C-e>', function() harpoon.ui:toggle_quick_menu(default_list) end)
+      vim.keymap.set('n', '<leader>e', function() default_list:add() end, { desc = 'Harpoon: Add file' })
+      vim.keymap.set('n', '<C-e>', function() harpoon.ui:toggle_quick_menu(default_list) end,
+        { desc = 'Harpoon: Toggle quick menu' })
 
       vim.keymap.set('n', '<C-h>', function() default_list:select(1) end, { desc = 'Harpoon: Go to file 1' })
       vim.keymap.set('n', '<C-j>', function() default_list:select(2) end, { desc = 'Harpoon: Go to file 2' })

@@ -8,7 +8,7 @@ return {
 
       vim.keymap.set('n', '<leader>xx', function()
         cloak.toggle()
-      end)
+      end, { desc = 'Toggle cloak (hide secrets)' })
     end,
   },
 }

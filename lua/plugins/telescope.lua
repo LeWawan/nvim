@@ -16,7 +16,7 @@ return {
       -- Keymaps
       vim.keymap.set('n', '<leader>fp', function()
         telescope.git_files()
-      end)
+      end, { desc = 'Telescope: Git files' })
       vim.keymap.set('n', '<leader>fw', function()
         picker.new({
           prompt_title = 'Git Worktrees',
@@ -39,30 +39,30 @@ return {
           end,
         }):find()
         -- git worktree selection support
-      end)
+      end, { desc = 'Telescope: Git worktrees' })
       vim.keymap.set('n', '<leader>ff', function()
         telescope.find_files { hidden = true }
-      end)
+      end, { desc = 'Telescope: Find files' })
       vim.keymap.set('n', '<leader>fg', function()
         telescope.live_grep { hidden = true }
-      end)
+      end, { desc = 'Telescope: Live grep' })
       vim.keymap.set('n', '<leader>fc', function()
         require('telescope.builtin').live_grep {
           default_text = 'class="[^"]*<cursor>[^"]*"',
         }
-      end)
+      end, { desc = 'Telescope: Grep CSS classes' })
       vim.keymap.set('n', '<leader>ft', function()
         telescope.treesitter()
-      end)
+      end, { desc = 'Telescope: Treesitter symbols' })
       vim.keymap.set('n', '<leader>fb', function()
         telescope.buffers()
-      end)
+      end, { desc = 'Telescope: Buffers' })
       vim.keymap.set('n', '<leader>fh', function()
         telescope.help_tags()
-      end)
+      end, { desc = 'Telescope: Help tags' })
       vim.keymap.set('n', "<leader>'", function()
         telescope.git_files { prompt_title = '< VimRC >', cwd = '~/.dotfiles/nvim/.config/nvim', hidden = false }
-      end)
+      end, { desc = 'Telescope: Neovim config files' })
     end,
   },
 }
