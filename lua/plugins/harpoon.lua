@@ -30,17 +30,31 @@ return {
 
       local default_list = harpoon:list('default')
       local term_list = harpoon:list('terminals')
+      local ai_list = harpoon:list('ai')
 
       vim.keymap.set('n', '<leader>e', function() default_list:add() end)
       vim.keymap.set('n', '<C-e>', function() harpoon.ui:toggle_quick_menu(default_list) end)
 
-      vim.keymap.set('n', '<C-h>', function() default_list:select(1) end)
-      vim.keymap.set('n', '<C-j>', function() default_list:select(2) end)
-      vim.keymap.set('n', '<C-k>', function() default_list:select(3) end)
-      vim.keymap.set('n', '<C-l>', function() default_list:select(4) end)
+      vim.keymap.set('n', '<C-h>', function() default_list:select(1) end, { desc = 'Harpoon: Go to file 1' })
+      vim.keymap.set('n', '<C-j>', function() default_list:select(2) end, { desc = 'Harpoon: Go to file 2' })
+      vim.keymap.set('n', '<C-k>', function() default_list:select(3) end, { desc = 'Harpoon: Go to file 3' })
+      vim.keymap.set('n', '<C-l>', function() default_list:select(4) end, { desc = 'Harpoon: Go to file 4' })
 
-      local create_new_buffer = function()
+      local create_new_terminal_buffer = function()
         vim.cmd('terminal')
+        local bufnr = vim.api.nvim_get_current_buf()
+        local bufname = vim.api.nvim_buf_get_name(bufnr)
+
+        return {
+          value = bufname,
+          context = {
+            bufnr = bufnr,
+          }
+        }
+      end
+
+      local create_new_ai_buffer = function()
+        require('opencode').command('session.first')
         local bufnr = vim.api.nvim_get_current_buf()
         local bufname = vim.api.nvim_buf_get_name(bufnr)
 
@@ -57,23 +71,39 @@ return {
 
         if list_item and vim.api.nvim_buf_is_valid(list_item.context.bufnr) then
           term_list:select(idx)
+          return
         end
+
+        local item = create_new_terminal_buffer()
 
         if list_item and not vim.api.nvim_buf_is_valid(list_item.context.bufnr) then
-          local item = create_new_buffer()
           term_list:replace_at(idx, item)
-        end
-
-        if not list_item or not vim.api.nvim_buf_is_valid(list_item.context.bufnr) then
-          local item = create_new_buffer()
+        else
           term_list:add(item)
         end
       end
 
-      vim.keymap.set('n', '<leader>th', function() goto_terminal(1) end)
-      vim.keymap.set('n', '<leader>tj', function() goto_terminal(2) end)
-      vim.keymap.set('n', '<leader>tk', function() goto_terminal(3) end)
-      vim.keymap.set('n', '<leader>tl', function() goto_terminal(4) end)
+      local function goto_ai(idx)
+        local list_item = ai_list:get(idx)
+
+        if list_item and vim.api.nvim_buf_is_valid(list_item.context.bufnr) then
+          ai_list:select(idx)
+          return
+        end
+
+         local item = create_new_ai_buffer()
+         if list_item then
+           ai_list:replace_at(idx, item)
+         else
+           ai_list:add(item)
+         end
+      end
+
+      vim.keymap.set('n', '<leader>th', function() goto_terminal(1) end, { desc = 'Harpoon: Go to terminal 1' })
+      vim.keymap.set('n', '<leader>tj', function() goto_terminal(2) end, { desc = 'Harpoon: Go to terminal 2' })
+      vim.keymap.set('n', '<leader>tk', function() goto_terminal(3) end, { desc = 'Harpoon: Go to terminal 3' })
+      vim.keymap.set('n', '<leader>tl', function() goto_terminal(4) end, { desc = 'Harpoon: Go to terminal 4' })
+      vim.keymap.set('n', '<leader>t;', function() goto_ai(1) end, { desc = 'Harpoon: Go to AI 1' })
 
       vim.api.nvim_create_autocmd({'ExitPre'}, {
         group = vim.api.nvim_create_augroup('harpoon', { clear = true }),
