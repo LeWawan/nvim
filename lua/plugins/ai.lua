@@ -35,8 +35,8 @@ return {
 
       -- Recommended/example keymaps
       vim.keymap.set({ "n", "x" }, "<leader>oa", function() require("opencode").select() end,       { desc = "Select OpenCode…" })
-      vim.keymap.set("n", "<S-C-u>", function() require("opencode").command("session.half.page.up") end,   { desc = "Scroll OpenCode up" })
-      vim.keymap.set("n", "<S-C-d>", function() require("opencode").command("session.half.page.down") end, { desc = "Scroll OpenCode down" })
+      vim.keymap.set("n", "<C-p>", function() require("opencode").command("session.half.page.up") end,   { desc = "Scroll OpenCode up" })
+      vim.keymap.set("n", "<C-n>", function() require("opencode").command("session.half.page.down") end, { desc = "Scroll OpenCode down" })
     end,
   },
   {
