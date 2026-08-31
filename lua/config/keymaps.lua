@@ -32,7 +32,9 @@ vim.keymap.set('n', '<C-p>', ':cprev<CR>', { desc = 'Previous quickfix item' })
 vim.keymap.set('n', '<C-n>', ':cnext<CR>', { desc = 'Next quickfix item' })
 
 -- Sessionizer
-vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux neww tmux-sessionizer<CR>', { desc = 'Open tmux sessionizer' })
+vim.keymap.set('n', '<C-f>', function()
+  require('config.tmux_sessionizer').open()
+end, { desc = 'Open tmux sessionizer' })
 
 -- Lsp
 local toggle_qf = function()
