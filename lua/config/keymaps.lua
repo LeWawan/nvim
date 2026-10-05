@@ -25,6 +25,32 @@ vim.keymap.set('n', '<leader>d', '"_d', { desc = 'Delete to void register' })
 vim.keymap.set('v', '<leader>d', '"_d', { desc = 'Delete to void register' })
 
 vim.keymap.set('n', '<leader>so', '<cmd>source %<CR>', { desc = 'Source current file' })
+
+vim.keymap.set('n', '<leader>ra', function()
+  for name, _ in pairs(package.loaded) do
+    if name:match("^thewawan%.anyforge") then
+      package.loaded[name] = nil
+    end
+  end
+
+  require("thewawan.anyforge").setup()
+  print("reloaded anyforge")
+end, { desc = 'reload anyforge plugin' })
+
+vim.keymap.set('n', '<leader>rg', function()
+  for name, _ in pairs(package.loaded) do
+    if name:match("^thewawan%.glab-tui-legacy") then
+      package.loaded[name] = nil
+    end
+  end
+
+  require("thewawan.glab-tui-legacy").setup()
+  print("reloaded glab-tui-legacy")
+end, { desc = 'reload glab-tui plugin' })
+vim.keymap.set('n', '<leader>glab', function ()
+    require('thewawan.glab-tui-legacy').toggle()
+end, { desc = 'glab-tui wrapper (stable, usage quotidien)' })
+
 vim.keymap.set('n', '<leader><leader>h', function()
   local file = vim.api.nvim_buf_get_name(0)
   -- filename without path or extension
