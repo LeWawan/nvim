@@ -15,11 +15,15 @@ return {
     },
     config = function()
       require('conform').setup {
+        format_on_save = {
+          timeout_ms = 5000,
+          lsp_format = 'fallback',
+        },
         formatters_by_ft = {
-          javascript = { 'prettier' },
-          typescript = { 'prettier' },
-          vue = { 'prettier' },
-          lua = { 'stylua' },
+          javascript = { 'oxfmt', 'prettier' },
+          typescript = { 'oxfmt', 'prettier' },
+          vue = { 'oxfmt', 'prettier' },
+          lua = { 'oxfmt', 'stylua' },
         },
         formatters = {
           rubocop = {
@@ -31,10 +35,6 @@ return {
           stylua = {
             prepend_args = { '--print-width', '120' },
           },
-        },
-        format_on_save = {
-          timeout_ms = 500,
-          lsp_fallback = 'fallback',
         },
       }
     end,
