@@ -12,9 +12,9 @@ return {
       },
     },
     lsp = {
-      hover = {
-        silent = true,
-      },
+      -- noice handles each client reply separately and clears the popup on each one:
+      -- in .vue, vue_ls's empty reply wipes vtsls's hover. Native hover waits for all clients.
+      hover = { enabled = false },
       override = {
         ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
         ['vim.lsp.util.stylize_markdown'] = true,
