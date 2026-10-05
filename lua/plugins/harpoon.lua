@@ -37,7 +37,6 @@ return {
 
       local default_list = harpoon:list('default')
       local term_list = harpoon:list('terminals')
-      local ai_list = harpoon:list('ai')
 
       vim.keymap.set('n', '<leader>e', function() default_list:add() end, { desc = 'Harpoon: Add file' })
       vim.keymap.set('n', '<C-e>', function() harpoon.ui:toggle_quick_menu(default_list) end,
@@ -85,59 +84,11 @@ return {
       vim.keymap.set('n', '<leader>tl', function() goto_terminal(4) end, { desc = 'Harpoon: Go to terminal 4' })
 
 
-      local find_opencode_buffer = function()
-        for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
-          local name = vim.api.nvim_buf_get_name(bufnr)
-          if name:match('^term://') and name:match('opencode') then
-            return bufnr
-          end
-        end
-      end
-
-      local function goto_ai(idx)
-        local list_item = ai_list:get(idx)
-        if list_item and vim.api.nvim_buf_is_valid(list_item.context.bufnr) then
-          ai_list:select(idx)
-          return
-        end
-
-        local assign = function(bufnr)
-          local item = { value = vim.api.nvim_buf_get_name(bufnr), context = { bufnr = bufnr }}
-          if list_item then
-            ai_list:replace_at(idx, item)
-          else
-            ai_list:add(item)
-          end
-        end
-
-        local existing = find_opencode_buffer()
-        if existing then
-          assign(existing)
-          ai_list:select(idx)
-          return
-        end
-
-        vim.api.nvim_create_autocmd('TermOpen', {
-          once = true,
-          callback = function(ev)
-            local bufname = vim.api.nvim_buf_get_name(ev.buf)
-            if bufname:match('^term://') and bufname:match('opencode') then
-              assign(ev.buf)
-            end
-          end
-        })
-        require('opencode').command('session.new')
-      end
-
-      vim.keymap.set('n', '<leader>t;', function() goto_ai(1) end, { desc = 'Harpoon: Go to AI 1' })
-
-
       vim.api.nvim_create_autocmd({'ExitPre'}, {
         group = vim.api.nvim_create_augroup('harpoon', { clear = true }),
         pattern = '*',
         callback = function()
           term_list:clear()
-          ai_list:clear()
         end
       })
     end,
