@@ -24,7 +24,7 @@ vim.keymap.set('n', '<leader>Y', '"+Y', { noremap = false, desc = 'Yank line to 
 vim.keymap.set('n', '<leader>d', '"_d', { desc = 'Delete to void register' })
 vim.keymap.set('v', '<leader>d', '"_d', { desc = 'Delete to void register' })
 
-vim.keymap.set('n', '<leader><leader>x', '<cmd>source %<CR>', { desc = 'Source current file' })
+vim.keymap.set('n', '<leader>so', '<cmd>source %<CR>', { desc = 'Source current file' })
 vim.keymap.set('n', '<leader><leader>h', function()
   local file = vim.api.nvim_buf_get_name(0)
   -- filename without path or extension
