@@ -1,0 +1,3 @@
+[tools]
+claude = "latest"
+"npm:@github/copilot" = "latest"
