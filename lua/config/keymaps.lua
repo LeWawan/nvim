@@ -51,3 +51,10 @@ local toggle_qf = function()
   end
 end
 vim.keymap.set('n', '<C-q>', toggle_qf, { desc = 'Toggle quickfix list' })
+
+-- Undotree
+vim.keymap.set('n', '<F5>', ':UndotreeToggle<CR>', { desc = 'Toggle Undotree' })
+
+vim.keymap.set("n", "<leader>au", "<cmd>botright split | terminal arduino-cli compile --fqbn arduino:avr:mega . && arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:mega<CR>")
+vim.keymap.set("n", "<leader>al", "<cmd>botright split | terminal arduino-cli monitor -p /dev/ttyACM0 -c baudrate=9600<cr>")
+vim.keymap.set("n", "<leader>avl", "<cmd>botright vsplit | terminal arduino-cli monitor -p /dev/ttyACM0 -c baudrate=9600<cr>")
