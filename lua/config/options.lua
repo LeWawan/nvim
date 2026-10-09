@@ -13,13 +13,16 @@ vim.opt.termguicolors = true
 vim.opt.mouse = 'a'
 
 -- vim.opt.clipboard = 'unnamedplus'
+--
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undodir = os.getenv 'HOME' .. '/.vim/undodir'
 vim.opt.undofile = true
 
 vim.opt.ignorecase = true
@@ -40,4 +43,4 @@ vim.g.loaded_perl_provider = 0
 vim.g.loaded_python_provider = 0
 vim.g.loaded_python3_provider = 0
 
-vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
+vim.env.PATH = vim.env.HOME .. '/.local/share/mise/shims:' .. vim.env.PATH
