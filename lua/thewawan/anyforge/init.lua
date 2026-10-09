@@ -65,6 +65,18 @@ end
 
 function M.setup()
   vim.api.nvim_create_user_command("AnyForge", function() M.toggle() end, {})
+
+  vim.keymap.set('n', '<leader>ra', function()
+    for name, _ in pairs(package.loaded) do
+      if name:match("^thewawan%.anyforge") then
+        package.loaded[name] = nil
+      end
+    end
+
+    require("thewawan.anyforge").setup()
+    print("reloaded anyforge")
+  end, { desc = 'reload anyforge plugin' })
 end
 
 return M
+

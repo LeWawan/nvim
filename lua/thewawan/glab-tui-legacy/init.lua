@@ -65,6 +65,10 @@ end
 
 function M.setup()
   vim.api.nvim_create_user_command("GlabTui", function() M.toggle() end, {})
+
+  vim.keymap.set('n', '<leader>glab', function ()
+      require('thewawan.glab-tui-legacy').toggle()
+  end, { desc = 'glab-tui wrapper' })
 end
 
 return M

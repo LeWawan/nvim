@@ -26,6 +26,7 @@ return {
     opts = {
       library = {
         { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+        "LazyVim",
       },
     },
   },
@@ -124,12 +125,12 @@ return {
       require('mason-lspconfig').setup { ensure_installed = vim.tbl_keys(servers) }
     end,
   },
-
   {
     'saghen/blink.cmp',
-    event = 'VeryLazy',
     version = '1.*',
-    dependencies = { 'folke/lazydev.nvim' },
+    dependencies = {
+      'folke/lazydev.nvim' ,
+    },
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
@@ -139,7 +140,7 @@ return {
         documentation = { auto_show = true, auto_show_delay_ms = 500 },
       },
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'lazydev', 'buffer' },
+        default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
         providers = {
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
         },
