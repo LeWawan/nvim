@@ -1,24 +1,16 @@
 return {
   {
     'nvim-treesitter/nvim-treesitter',
+    branch = 'main',
     lazy = false,
     build = ':TSUpdate',
-    opts = {
-      ensure_installed = {
-        'lua',
-        'html',
-        'css',
-        'vue',
-        'javascript',
-        'typescript',
-        'json',
-        'bash',
-      },
-      auto_install = true,
-      highlight = { enable = true },
-      indent = { enable = true },
-    },
+    config = function()
+      require('nvim-treesitter').install { 'lua', 'html', 'css', 'vue', 'javascript', 'typescript', 'json', 'bash', 'python' }
+      vim.api.nvim_create_autocmd('FileType', {
+        callback = function()
+          pcall(vim.treesitter.start)
+        end,
+      })
+    end,
   },
-  -- Commented to see if i prefer without it
-  -- { 'nvim-treesitter/nvim-treesitter-context' },
 }
