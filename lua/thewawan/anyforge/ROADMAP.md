@@ -120,6 +120,7 @@ Ordre choisi pour valider l'architecture tot (api + picker + diff) sur UNE
 ressource avant de dupliquer le pattern sur les onze autres.
 
 ### Phase 0 -- fondations
+
 - [x] Toggle terminal glab-tui brut (jetable, sert de reference/fallback)
 - [ ] `api.lua`: wrapper shell -> JSON
 - [ ] `providers/gitlab.lua`: interface commune (mr, issues, ...) implementee via `glab`
@@ -128,26 +129,31 @@ ressource avant de dupliquer le pattern sur les onze autres.
       debug facile quand une action echoue)
 
 ### Phase 1 -- merge requests (valide tout le pattern)
+
 - [ ] `resources/mr.lua`: liste, preview description/statut
 - [ ] `diff.lua`: checkout + ouverture diffview.nvim sur la MR selectionnee
 - [ ] Actions: checkout, approve, merge, ouvrir dans le navigateur
 
 ### Phase 2 -- issues (confirme que la factory generalise bien)
+
 - [ ] `resources/issues.lua`: liste, filtre par label/assignee
 - [ ] Actions: edit labels, assign, fermer/rouvrir
 - [ ] Bulk edit (selection multiple telescope) si le besoin se confirme a l'usage
 
 ### Phase 3 -- pipelines et jobs
+
 - [ ] `resources/pipelines.lua`: liste, statut, retry
 - [ ] `resources/jobs.lua`: liste jobs d'un pipeline
 - [ ] Stream logs d'un job dans le buffer `log.lua` (pas un vrai terminal
       interactif, un flux affiche au fur et a mesure)
 
 ### Phase 4 -- runners et releases
+
 - [ ] `resources/runners.lua`: liste, statut (actif/pause)
 - [ ] `resources/releases.lua`: liste, creation
 
 ### Phase 5 -- reste du perimetre (branches, environments, milestones, notifications)
+
 - [ ] Un module par ressource, meme pattern que phases 1-2. A ce stade la
       factory picker doit deja tout couvrir sans changement.
 
