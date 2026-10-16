@@ -2,13 +2,15 @@ return {
   {
     'laytan/cloak.nvim',
     event = { 'BufRead', 'BufNewFile' },
-    config = function()
-      local cloak = require 'cloak'
-      cloak.setup()
-
-      vim.keymap.set('n', '<leader>xx', function()
-        cloak.toggle()
-      end, { desc = 'Toggle cloak (hide secrets)' })
-    end,
+    opts = {},
+    keys = {
+      {
+        '<leader>xx',
+        function()
+          require('cloak').toggle()
+        end,
+        desc = 'Toggle cloak (hide secrets)',
+      },
+    },
   },
 }
