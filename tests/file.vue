@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import CustomComponent from './CustomComponent.vue';
+import CustomComponent from './CustomComponent.vue'
 
-
-console.log('file.vue');
-
+console.log('file.vue')
 </script>
 
 <template>
